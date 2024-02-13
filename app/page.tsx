@@ -39,7 +39,8 @@ const WelcomePage = ({ onWelcomeComplete }: { onWelcomeComplete: () => void }) =
 };
 
 // Function to get no button text
-const getNoButtonText = (noCount) => {
+
+const getNoButtonText = (noCount: number) => {
   const phrases = [
     "No",
     "Are you sure??🙄",

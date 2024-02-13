@@ -18,7 +18,7 @@ const WelcomePage = ({ onWelcomeComplete }: { onWelcomeComplete: () => void }) =
     // Move to initial page after 5 seconds
     setTimeout(() => {
       onWelcomeComplete();
-    }, 5000);
+    }, 8000);
   }, []);
 
   return (
@@ -50,8 +50,8 @@ const getNoButtonText = (noCount: number) => {
     "Just think about it🥺",
     "If you say no, I'll be very sad🙁",
     "I'll be very very sad😕",
-    "I'll be very very very sad😓",
-    "I'll be very very very very sad😖",
+    "I'll buy you bababeque😓",
+    "I'll buy you mashawa 😖",
     "Ok fine😡, I'll stop asking...",
     "Just kidding, PLEASE SAY YES🙏",
     "I'll be very very very very very sad🥴",
@@ -83,119 +83,119 @@ const Page = () => {
   const images = [
     {
       src: "/images/1.jpg",
-      caption: "Image 1 Caption"
+      caption: "Lost in your eyes, lost in love."
     },
     {
       src: "/images/2.jpg",
-      caption: "Image 2 Caption"
+      caption: "With you, every moment is a love story."
     },
     {
       src: "/images/3.jpg",
-      caption: "Image 3 Caption"
+      caption: "In your embrace, I find my sanctuary."
     },
     {
       src: "/images/4.jpg",
-      caption: "Image 1 Caption"
+      caption: "You're the melody to my heart's song."
     },
     {
       src: "/images/5.jpg",
-      caption: "Image 2 Caption"
+      caption: "Together, we paint the world with love."
     },
     {
       src: "/images/6.jpg",
-      caption: "Image 3 Caption"
+      caption: "Your smile is my favorite view."
     },
     {
       src: "/images/7.jpg",
-      caption: "Image 1 Caption"
+      caption: "With you, every day feels like a fairytale."
     },
     {
       src: "/images/8.jpg",
-      caption: "Image 2 Caption"
+      caption: "Your laughter is music to my soul."
     },
     {
       src: "/images/9.jpg",
-      caption: "Image 3 Caption"
+      caption: "In your arms, I find home."
     },
     {
       src: "/images/10.jpg",
-      caption: "Image 1 Caption"
+      caption: "With you, I've found...a lot"
     },
     {
       src: "/images/11.jpg",
-      caption: "Image 2 Caption"
+      caption: "You make every moment feel magical."
     },
     {
       src: "/images/12.jpg",
-      caption: "Image 3 Caption"
+      caption: "Your love is my greatest adventure."
     },
     {
       src: "/images/13.jpg",
-      caption: "Image 1 Caption"
+      caption: "In your presence, time stands still."
     },
     {
       src: "/images/14.jpg",
-      caption: "Image 2 Caption"
+      caption: "With you, life is a beautiful journey."
     },
     {
       src: "/images/15.jpg",
-      caption: "Image 3 Caption"
+      caption: "Your love is the light that guides me."
     },
     {
       src: "/images/16.jpg",
-      caption: "Image 1 Caption"
+      caption: "In your eyes, I see turbulence, and peace"
     },
     {
       src: "/images/17.jpg",
-      caption: "Image 2 Caption"
+      caption: "With you, I've found true happiness."
     },
     {
       src: "/images/18.jpg",
-      caption: "Image 3 Caption"
+      caption: "Your love is the anchor that grounds me."
     },
     {
       src: "/images/19.jpg",
-      caption: "Image 1 Caption"
+      caption: "In your smile, I find endless joy."
     },
     {
       src: "/images/20.jpg",
-      caption: "Image 2 Caption"
+      caption: "With you, love knows no boundaries."
     },
     {
       src: "/images/21.jpg",
-      caption: "Image 3 Caption"
+      caption: "Your touch ignites a fire within me."
     },
     {
       src: "/images/22.jpg",
-      caption: "Image 1 Caption"
+      caption: "In your laughter, I find pure bliss."
     },
     {
       src: "/images/23.jpg",
-      caption: "Image 2 Caption"
+      caption: "With you, every day is a new beginning."
     },
     {
       src: "/images/24.jpg",
-      caption: "Image 3 Caption"
+      caption: "Your love is my greatest treasure."
     },
     {
       src: "/images/25.jpg",
-      caption: "Image 1 Caption"
+      caption: "In your presence, I am complete."
     },
     {
       src: "/images/26.jpg",
-      caption: "Image 2 Caption"
+      caption: "With you, I've found my soulmate."
     },
     {
       src: "/images/27.jpg",
-      caption: "Image 3 Caption"
+      caption: "Your love fills my heart with warmth."
     },
     {
       src: "/images/28.jpg",
-      caption: "Image 1 Caption"
+      caption: "In your arms, I feel invincible."
     },
     {
       src: "/images/29.jpg",
-      caption: "Image 2 Caption"
+      caption: "With you, love is all we need."
     },
 
   ];
@@ -314,22 +314,26 @@ const Page = () => {
                 </button>
               </div>
               <div className="relative p-6 flex-auto">
-                <div className="h-[500px] md:h-[800px] ">
+                <div className="h-[500px] md:h-[800px] relative">
                   {images.map((image, index) => (
-                    <img
+                    <div
                       key={index}
-                      src={image.src}
-                      alt={`Image ${index + 1}`}
                       className="h-full w-full object-cover absolute"
                       style={{
                         zIndex: currentIndex === index ? 1 : 0,
                         display: currentIndex === index ? "block" : "none"
                       }}
-                    />
+                    >
+                      <img
+                        src={image.src}
+                        alt={`Image ${index + 1}`}
+                        className="h-full w-full object-cover"
+                      />
+                      <div className="absolute top-0 left-0 right-0 bg-gray-800 bg-opacity-50 text-white p-2">
+                        {image.caption}
+                      </div>
+                    </div>
                   ))}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-50 text-white p-2">
-                    {images[currentIndex].caption}
-                  </div>
                 </div>
               </div>
             </div>

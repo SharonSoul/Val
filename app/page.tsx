@@ -210,7 +210,7 @@ const Page = () => {
           prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
       }
-    }, 2000);
+    }, 2500);
     return () => clearInterval(interval);
   }, [autoSwitch, currentIndex]);
 

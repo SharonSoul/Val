@@ -300,11 +300,11 @@ const Page = () => {
       )}
       {/* Image gallery */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none bg-slate-300 focus:outline-none">
           <div className="relative w-full md:w-[40%] mx-auto my-6">
-            <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
+            <div className="relative flex flex-col w-full  border-0 rounded-lg shadow-lg outline-none focus:outline-none">
               <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-blueGray-200">
-                <h3 className="text-3xl font-semibold">Memories</h3>
+                <h3 className="text-3xl font-semibold">Our Memories</h3>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={() => setModalOpen(false)} // Close the modal
@@ -315,19 +315,15 @@ const Page = () => {
               <div className="relative p-6 flex-auto">
                 <div className="h-[500px] md:h-[800px] ">
                   {images.map((image, index) => (
-                    <motion.img
+                    <img
                       key={index}
                       src={image.src}
                       alt={`Image ${index + 1}`}
                       className="h-full w-full object-cover absolute"
                       style={{
                         zIndex: currentIndex === index ? 1 : 0,
-                        x: currentIndex === index ? 0 : (currentIndex < index ? "100%" : "-100%")
+                        display: currentIndex === index ? "block" : "none"
                       }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }}
                     />
                   ))}
                   <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-50 text-white p-2">

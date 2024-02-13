@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 
 // Function to get no button text
-const getNoButtonText = (noCount) => {
+const getNoButtonText = (noCount: number) => {
   const phrases = [
     "No",
     "Are you sure??🙄",

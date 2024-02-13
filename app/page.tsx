@@ -4,8 +4,42 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 
+
+// WelcomePage component
+const WelcomePage = ({ onWelcomeComplete }) => {
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    // Show message after 1 second
+    setTimeout(() => {
+      setShowMessage(true);
+    }, 1000);
+
+    // Move to initial page after 5 seconds
+    setTimeout(() => {
+      onWelcomeComplete();
+    }, 5000);
+  }, []);
+
+  return (
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      {showMessage && (
+        <motion.div
+          className="text-4xl font-bold text-center py-6"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          Welcome, Mariam. ❤️ <br />
+          I have a question for you...
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
 // Function to get no button text
-const getNoButtonText = (noCount: number) => {
+const getNoButtonText = (noCount) => {
   const phrases = [
     "No",
     "Are you sure??🙄",
@@ -26,13 +60,25 @@ const getNoButtonText = (noCount: number) => {
   return phrases[noCount % phrases.length];
 };
 
+// Animation variants
+const animationVariants = [
+  { opacity: 0, x: "-100%", y: 0 },
+  { opacity: 1, x: 0, y: 0 },
+  { opacity: 0, x: "100%", y: 0 },
+  { opacity: 1, x: 0, y: 0 },
+  { opacity: 0, x: 0, y: "-100%" },
+  { opacity: 1, x: 0, y: 0 },
+  { opacity: 0, x: 0, y: "100%" },
+  { opacity: 1, x: 0, y: 0 },
+];
+
 // Page component
 const Page = () => {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
   const [modalOpen, setModalOpen] = useState(false); // Added state for modal visibility
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [autoSwitch, setAutoSwitch] = useState(true); // State for automatic image switching
+  const [autoSwitch, setAutoSwitch] = useState(true);   // State for automatic image switching
   const images = [
     {
       src: "/images/1.jpg",
@@ -150,8 +196,11 @@ const Page = () => {
       src: "/images/29.jpg",
       caption: "Image 2 Caption"
     },
-   
+
   ];
+
+
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -265,16 +314,22 @@ const Page = () => {
               </div>
               <div className="relative p-6 flex-auto">
                 <div className="h-[500px] md:h-[800px] ">
-                  <motion.img
-                    src={images[currentIndex].src}
-                    alt={`Image ${currentIndex + 1}`}
-                    className="h-full w-full object-cover"
-                    {...handlers}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                  />
+                  {images.map((image, index) => (
+                    <motion.img
+                      key={index}
+                      src={image.src}
+                      alt={`Image ${index + 1}`}
+                      className="h-full w-full object-cover absolute"
+                      style={{
+                        zIndex: currentIndex === index ? 1 : 0,
+                        x: currentIndex === index ? 0 : (currentIndex < index ? "100%" : "-100%")
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  ))}
                   <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-50 text-white p-2">
                     {images[currentIndex].caption}
                   </div>
@@ -288,6 +343,15 @@ const Page = () => {
   );
 };
 
-export default function HomePage() {
-  return <Page />;
-}
+// App component
+const App = () => {
+  const [showInitialPage, setShowInitialPage] = useState(false);
+
+  const handleWelcomeComplete = () => {
+    setShowInitialPage(true);
+  };
+
+  return showInitialPage ? <Page /> : <WelcomePage onWelcomeComplete={handleWelcomeComplete} />;
+};
+
+export default App;

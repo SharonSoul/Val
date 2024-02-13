@@ -1,8 +1,30 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
+
+// Function to get no button text
+const getNoButtonText = (noCount) => {
+  const phrases = [
+    "No",
+    "Are you sure??🙄",
+    "Really sure?🤔",
+    "Are you positive???😶",
+    "Please my love...🙏",
+    "Just think about it🥺",
+    "If you say no, I'll be very sad🙁",
+    "I'll be very very sad😕",
+    "I'll be very very very sad😓",
+    "I'll be very very very very sad😖",
+    "Ok fine😡, I'll stop asking...",
+    "Just kidding, PLEASE SAY YES🙏",
+    "I'll be very very very very very sad🥴",
+    "You're breaking my heart😥😥😥"
+  ];
+
+  return phrases[noCount % phrases.length];
+};
 
 // Page component
 const Page = () => {
@@ -10,32 +32,32 @@ const Page = () => {
   const [yesPressed, setYesPressed] = useState(false);
   const [modalOpen, setModalOpen] = useState(false); // Added state for modal visibility
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [autoSwitch, setAutoSwitch] = useState(true); // State for automatic image switching
   const images = [
-    "/images/next.svg",
-    "/images/vercel.svg",
-    "https://gifdb.com/images/high/animated-bear-kiss-enngnq0gm2r405bt.webp"
+    {
+      src: "/images/next.svg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/vercel.svg",
+      caption: "Image 2 Caption"
+    },
+    {
+      src: "https://gifdb.com/images/high/animated-bear-kiss-enngnq0gm2r405bt.webp",
+      caption: "Image 3 Caption"
+    }
   ];
 
-  const getNoButtonText = () => {
-    const phrases = [
-      "No",
-      "Are you sure??🙄",
-      "Really sure?🤔",
-      "Are you positive???😶",
-      "Please my love...🙏",
-      "Just think about it🥺",
-      "If you say no, I'll be very sad🙁",
-      "I'll be very very sad😕",
-      "I'll be very very very sad😓",
-      "I'll be very very very very sad😖",
-      "Ok fine😡, I'll stop asking...",
-      "Just kidding, PLEASE SAY YES🙏",
-      "I'll be very very very very very sad🥴",
-      "You're breaking my heart😥😥😥"
-    ];
-
-    return phrases[noCount % phrases.length];
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (autoSwitch) {
+        setCurrentIndex((prevIndex) =>
+          prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        );
+      }
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [autoSwitch, currentIndex]);
 
   const handleSwipeLeft = () => {
     setCurrentIndex((prevIndex) =>
@@ -112,7 +134,7 @@ const Page = () => {
                         className="text-slate-800"
                         onClick={() => setNoCount(noCount + 1)}
                       >
-                        {noCount === 0 ? "No 😥" : getNoButtonText()}
+                        {noCount === 0 ? "No 😥" : getNoButtonText(noCount)}
                       </p>
                     </div>
                   </div>
@@ -139,7 +161,7 @@ const Page = () => {
               <div className="relative p-6 flex-auto">
                 <div className="h-[200px]">
                   <motion.img
-                    src={images[currentIndex]}
+                    src={images[currentIndex].src}
                     alt={`Image ${currentIndex + 1}`}
                     className="h-full w-full object-cover"
                     {...handlers}
@@ -148,6 +170,9 @@ const Page = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
                   />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-50 text-white p-2">
+                    {images[currentIndex].caption}
+                  </div>
                 </div>
               </div>
             </div>

@@ -6,7 +6,7 @@ import { useSwipeable } from "react-swipeable";
 
 
 // WelcomePage component
-const WelcomePage = ({ onWelcomeComplete }) => {
+const WelcomePage = ({ onWelcomeComplete }: { onWelcomeComplete: () => void }) => {
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {

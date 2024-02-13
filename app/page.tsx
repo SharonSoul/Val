@@ -35,17 +35,122 @@ const Page = () => {
   const [autoSwitch, setAutoSwitch] = useState(true); // State for automatic image switching
   const images = [
     {
-      src: "/images/next.svg",
+      src: "/images/1.jpg",
       caption: "Image 1 Caption"
     },
     {
-      src: "/images/vercel.svg",
+      src: "/images/2.jpg",
       caption: "Image 2 Caption"
     },
     {
-      src: "https://gifdb.com/images/high/animated-bear-kiss-enngnq0gm2r405bt.webp",
+      src: "/images/3.jpg",
       caption: "Image 3 Caption"
-    }
+    },
+    {
+      src: "/images/4.jpg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/5.jpg",
+      caption: "Image 2 Caption"
+    },
+    {
+      src: "/images/6.jpg",
+      caption: "Image 3 Caption"
+    },
+    {
+      src: "/images/7.jpg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/8.jpg",
+      caption: "Image 2 Caption"
+    },
+    {
+      src: "/images/9.jpg",
+      caption: "Image 3 Caption"
+    },
+    {
+      src: "/images/10.jpg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/11.jpg",
+      caption: "Image 2 Caption"
+    },
+    {
+      src: "/images/12.jpg",
+      caption: "Image 3 Caption"
+    },
+    {
+      src: "/images/13.jpg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/14.jpg",
+      caption: "Image 2 Caption"
+    },
+    {
+      src: "/images/15.jpg",
+      caption: "Image 3 Caption"
+    },
+    {
+      src: "/images/16.jpg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/17.jpg",
+      caption: "Image 2 Caption"
+    },
+    {
+      src: "/images/18.jpg",
+      caption: "Image 3 Caption"
+    },
+    {
+      src: "/images/19.jpg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/20.jpg",
+      caption: "Image 2 Caption"
+    },
+    {
+      src: "/images/21.jpg",
+      caption: "Image 3 Caption"
+    },
+    {
+      src: "/images/22.jpg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/23.jpg",
+      caption: "Image 2 Caption"
+    },
+    {
+      src: "/images/24.jpg",
+      caption: "Image 3 Caption"
+    },
+    {
+      src: "/images/25.jpg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/26.jpg",
+      caption: "Image 2 Caption"
+    },
+    {
+      src: "/images/27.jpg",
+      caption: "Image 3 Caption"
+    },
+    {
+      src: "/images/28.jpg",
+      caption: "Image 1 Caption"
+    },
+    {
+      src: "/images/29.jpg",
+      caption: "Image 2 Caption"
+    },
+   
   ];
 
   useEffect(() => {
@@ -77,7 +182,7 @@ const Page = () => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen -mt-16">
+    <div className="flex flex-col items-center justify-center h-screen -mt-16 ">
       {yesPressed ? (
         <>
           <img
@@ -92,7 +197,7 @@ const Page = () => {
               onClick={() => setModalOpen(true)} // Open the modal
               className="flex-1 font-bold md:text-xl bg-white px-6 py-3 rounded-full"
             >
-              Prompt Memories
+              Show Memories
             </button>
           </div>
         </>
@@ -147,7 +252,7 @@ const Page = () => {
       {/* Image gallery */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-          <div className="relative w-auto max-w-3xl mx-auto my-6">
+          <div className="relative w-full md:w-[40%] mx-auto my-6">
             <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
               <div className="flex items-start justify-between p-5 border-b border-solid rounded-t border-blueGray-200">
                 <h3 className="text-3xl font-semibold">Memories</h3>
@@ -155,11 +260,11 @@ const Page = () => {
                   className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={() => setModalOpen(false)} // Close the modal
                 >
-                  <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
+                  <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">X</span>
                 </button>
               </div>
               <div className="relative p-6 flex-auto">
-                <div className="h-[200px]">
+                <div className="h-[500px] md:h-[800px] ">
                   <motion.img
                     src={images[currentIndex].src}
                     alt={`Image ${currentIndex + 1}`}
